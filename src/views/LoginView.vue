@@ -63,7 +63,6 @@ const password = ref('');
 const loading = ref(false);
 const error = ref(null);
 
-// Validación: formato de email, contraseña de >=6 caracteres [cite: 55]
 const emailRules = [
   v => !!v || 'El email es obligatorio.',
   v => /.+@.+\..+/.test(v) || 'El email debe ser válido.',
@@ -73,7 +72,6 @@ const passwordRules = [
   v => v.length >= 6 || 'La contraseña debe tener al menos 6 caracteres.',
 ];
 
-// Lógica para deshabilitar el botón si es inválido [cite: 57]
 const isFormValid = computed(() => {
   return emailRules.every(rule => rule(email.value) === true) &&
          passwordRules.every(rule => rule(password.value) === true);
@@ -87,10 +85,8 @@ const handleLogin = async () => {
 
   try {
     await login({ email: email.value, password: password.value });
-    // Redirección correcta post-login [cite: 68]
     router.push('/');
   } catch (err) {
-    // Manejo de errores de credenciales [cite: 70]
     error.value = err.message;
   } finally {
     loading.value = false;

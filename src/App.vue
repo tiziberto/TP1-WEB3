@@ -38,7 +38,6 @@ import { getActiveUser, logout } from './services/authService';
 const user = ref(null);
 
 onMounted(() => {
-  // Persistencia de sesión
   user.value = getActiveUser(); 
 });
 

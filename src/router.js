@@ -1,7 +1,5 @@
-// src/router.js
-
 import { createRouter, createWebHistory } from 'vue-router';
-import { getActiveUser } from './services/authService'; // <-- Importar
+import { getActiveUser } from './services/authService'; 
 
 const routes = [
   { path: '/', name: 'Home', component: () => import('./views/HomeView.vue') },
@@ -14,7 +12,6 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  // Restaurar Scroll [cite: 74]
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
@@ -24,17 +21,14 @@ const router = createRouter({
   }
 });
 
-// Guardia global de rutas (Router) [cite: 60]
 router.beforeEach((to, from, next) => {
   const user = getActiveUser();
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   const isPublic = to.matched.some(record => record.meta.public);
 
   if (requiresAuth && !user) {
-    // Redirigir a /login si la ruta requiere auth y el usuario no está autenticado [cite: 61]
     next('/login');
   } else if (user && isPublic) {
-    // Evitar acceder al login si ya hay sesión (redirigir a /) [cite: 62]
     next('/');
   } else {
     next();

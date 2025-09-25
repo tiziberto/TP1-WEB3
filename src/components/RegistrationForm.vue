@@ -41,24 +41,18 @@ const clientName = ref('');
 const message = ref('');
 const isSuccess = ref(false);
 
-// Reglas de validación [cite: 33]
 const nameRules = [
   v => !!v || 'El nombre es obligatorio.',
-  v => v.length >= 3 || 'El nombre debe tener al menos 3 caracteres.', // Mejora: >= 3 caracteres
+  v => v.length >= 3 || 'El nombre debe tener al menos 3 caracteres.', 
 ];
 
-// Comprueba si el formulario es válido (se asume que la validación nativa de Vuetify es suficiente)
 const isFormValid = computed(() => {
   return clientName.value.length >= 3;
 });
 
 const handleSubmit = () => {
-  // Validación básica: nombre no vacío [cite: 33]
   if (clientName.value.length >= 3) {
-    // Simular guardado (console.log) [cite: 30]
-    console.log(`Cliente registrado: ${clientName.value}`);
-
-    // Mostrar confirmación en pantalla solo si hay nombre [cite: 30]
+    console.log(`Cliente registrado: ${clientName.value}`); //simular guarado en consola
     message.value = `¡Bienvenido(a), ${clientName.value}! Su registro ha sido exitoso.`;
     isSuccess.value = true;
     clientName.value = ''; // Limpiar el campo
@@ -68,7 +62,6 @@ const handleSubmit = () => {
     isSuccess.value = false;
   }
 
-  // Ocultar mensaje después de un tiempo
   setTimeout(() => {
     message.value = '';
   }, 4000);

@@ -57,7 +57,6 @@ const router = useRouter();
 const searchQuery = ref('');
 const shoppingCartRef = ref(null); // <-- 3. Inicializa la referencia
 
-// Lógica de filtrado case-insensitive
 const filteredProducts = computed(() => {
   if (!searchQuery.value) {
     return products;
@@ -68,15 +67,12 @@ const filteredProducts = computed(() => {
   );
 });
 
-// 4. Manejador de evento que llama al método del hijo a través de la referencia
 const handleAddToCart = (productId) => {
   if (shoppingCartRef.value) {
-    // Llama al método expuesto "addItem"
     shoppingCartRef.value.addItem(productId);
   }
 };
 
-// Navegación programática
 const goToDetail = (id) => {
   router.push(`/productos/${id}`);
 };

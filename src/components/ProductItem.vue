@@ -51,9 +51,9 @@ const emits = defineEmits(['addToCart']);
 
 <style scoped>
 .out-of-stock {
-  opacity: 0.6; /* Estilo visual para stock 0 */
+  opacity: 0.6; /* estilo visual para cuando el stock es 0 */
 }
-/* Estilo opcional para la capa de fuera de stock */
+
 .overlay-out-of-stock {
   position: absolute;
   top: 0;
